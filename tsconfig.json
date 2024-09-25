@@ -1,18 +1,17 @@
 {
-  "ts-node": {
-    "compilerOptions": {
-      "target": "ESNext",
-      "module": "NodeNext",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "esModuleInterop": true,
 
-      "moduleResolution": "NodeNext",
+    "moduleResolution": "NodeNext",
 
-      "strict": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
 
-      "typeRoots": ["src", "node_modules"]
-    },
+    "typeRoots": ["src", "node_modules"]
+  },
 
-    "include": ["src"]
-  }
+  "include": ["src"]
 }
