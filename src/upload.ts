@@ -11,13 +11,14 @@ console.log("[GCP CLOUD STORAGE] Bucket Name : ", GCP_STORAGE_BUCKET_NAME);
 const storage = new Storage();
 const transferManager = new TransferManager(storage.bucket(GCP_STORAGE_BUCKET_NAME as string));
 
-async function uploadFileToGCPStorage() {
+async function uploadFileToGCPStorage(dirName: string) {
   console.log("[GCP CLOUD STORAGE] uploading files...");
-  const files = await fs.readdir(path.resolve("downloads"));
+  const files = await fs.readdir(path.resolve(dirName));
+  const filePaths = files.map((file) => path.join(dirName, file));
 
-  await transferManager.uploadManyFiles(files);
+  await transferManager.uploadManyFiles(filePaths);
 
   console.log("[GCP CLOUD STORAGE] successfully uploaded files");
 }
 
-uploadFileToGCPStorage();
+uploadFileToGCPStorage("downloads");
