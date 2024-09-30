@@ -15,14 +15,14 @@ async function downloadFile(url: string, fileName: string) {
   const response = await axios({
     url,
     method: "GET",
-    responseType: "stream", // 스트림 형태로 응답 받기
+    responseType: "stream",
   });
 
   if (!fs.existsSync("downloads")) await mkdir("downloads");
   const destination = path.resolve("./downloads", fileName);
   const fileStream = fs.createWriteStream(destination, { flags: "wx" });
 
-  response.data.pipe(fileStream); // 스트림 데이터를 파일로 저장
+  response.data.pipe(fileStream);
 
   await new Promise((resolve, reject) => {
     fileStream.on("finish", resolve);
@@ -32,6 +32,7 @@ async function downloadFile(url: string, fileName: string) {
 
 async function main() {
   for (let page = 1; page < 1000; page++) {
+    console.log("[CRAWLING] Page : ", page);
     const codiMap = await readCodiMap(page);
 
     for (const codi of codiMap) {
