@@ -4,14 +4,15 @@
   "description": "Read Codi-Map Data From Musinsa.com",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node --project tsconfig.json src/index.ts",
+    "start:crawling": "ts-node --project tsconfig.json src/index.ts",
+    "start:uploading": "ts-node src/upload.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^7.13.0",
     "@types/node": "^22.5.4",
-    "axios": "^1.7.7",
     "cheerio": "^1.0.0",
     "ts-node": "^10.9.2"
   },
@@ -19,6 +20,8 @@
     "@types/follow-redirects": "^1.14.4",
     "@types/mime-types": "^2.1.4",
     "@types/uuid": "^10.0.0",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
     "tslib": "^2.7.0",
     "uuid": "^10.0.0"
   }
