@@ -4,8 +4,6 @@ import axios from "axios";
 import { v4 as uuid } from "uuid";
 
 import { mkdir } from "fs/promises";
-import { Readable } from "stream";
-import { finished } from "stream/promises";
 
 async function readCodiMap(page: number) {
   const URL = `https://content.musinsa.com/api2/content/snap/v1/snaps/1268021161197507776/recommendations?page=${page}&size=10`;
@@ -14,11 +12,22 @@ async function readCodiMap(page: number) {
 }
 
 async function downloadFile(url: string, fileName: string) {
-  const response = await fetch(url);
+  const response = await axios({
+    url,
+    method: "GET",
+    responseType: "stream", // 스트림 형태로 응답 받기
+  });
+
   if (!fs.existsSync("downloads")) await mkdir("downloads");
   const destination = path.resolve("./downloads", fileName);
   const fileStream = fs.createWriteStream(destination, { flags: "wx" });
-  await finished(Readable.fromWeb(response.body as any).pipe(fileStream));
+
+  response.data.pipe(fileStream); // 스트림 데이터를 파일로 저장
+
+  await new Promise((resolve, reject) => {
+    fileStream.on("finish", resolve);
+    fileStream.on("error", reject);
+  });
 }
 
 async function main() {
