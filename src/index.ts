@@ -31,14 +31,17 @@ async function downloadFile(url: string, fileName: string) {
 }
 
 async function main() {
-  for (let page = 1; page < 1000; page++) {
+  let id = 1;
+  for (let page = 1; page < 10; page++) {
     console.log("[CRAWLING] Page : ", page);
     const codiMap = await readCodiMap(page);
 
     for (const codi of codiMap) {
       const imageURL = codi.medias[0].path;
-      console.log(imageURL);
-      downloadFile(imageURL, uuid() + ".jpg");
+
+      const serializedTag = codi.tags.map((tag: { name: string }) => tag.name).join(",");
+      downloadFile(imageURL, `${id}-${serializedTag}.jpg`);
+      id++;
     }
   }
 }
