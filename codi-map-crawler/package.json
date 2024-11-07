@@ -1,19 +1,11 @@
 {
-  "name": "codi-map",
+  "name": "codi-map-crawler",
   "version": "1.0.0",
-  "description": "Read Codi-Map Data From Musinsa.com",
-  "main": "index.js",
-  "private": true,
-  "workspaces": [
-    "codi-map-crawler",
-    "codi-map-uploader"
-  ],
+  "main": "src/index.ts",
+  "license": "MIT",
   "scripts": {
-    "crawler": "yarn workspace codi-map-crawler",
-    "uploader": "yarn workspace codi-map-uploader"
+    "start": "ts-node --project tsconfig.json src/index.ts"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@google-cloud/storage": "^7.13.0",
     "@types/node": "^22.5.4",

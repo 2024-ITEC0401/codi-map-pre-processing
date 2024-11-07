@@ -1,0 +1,13 @@
+{
+  "name": "codi-map-uploader",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node --project tsconfig.json src/index.ts"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.14.0",
+    "dotenv": "^16.4.5"
+  }
+}

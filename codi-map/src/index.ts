@@ -1,5 +1,5 @@
-import { downloadFile, readCodiMap } from "./crawling";
-import { removeDownloadedFiles, uploadFileToGCPStorage } from "./upload";
+import { downloadFile, readCodiMap } from "codi-map-crawler";
+import { removeDownloadedFiles, uploadFileToGCPStorage } from "codi-map-uploader";
 
 async function main(arg: string) {
   console.log("arg : ", arg);
