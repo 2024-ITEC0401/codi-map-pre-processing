@@ -6,11 +6,13 @@
   "private": true,
   "workspaces": [
     "codi-map-crawler",
-    "codi-map-uploader"
+    "codi-map-uploader",
+    "codi-map-vertex-ai"
   ],
   "scripts": {
     "crawler": "yarn workspace codi-map-crawler",
-    "uploader": "yarn workspace codi-map-uploader"
+    "uploader": "yarn workspace codi-map-uploader",
+    "vertexai": "yarn workspace codi-map-vertex-ai"
   },
   "author": "",
   "license": "ISC",
