@@ -16,10 +16,14 @@ async function main() {
   const files = await listBucketFiles(bucketName);
 
   for (const [index, file] of files.entries()) {
-    console.log(`Analyzing file ${index} : ${file}`);
-    const json = await analyzeImage(file);
-    console.log(`Inserting data to BigQuery : ${index}:${file}`);
-    await insertRows(datasetName, tableName, [{ uri: file, json: JSON.stringify(json) }]);
+    const decodedFile = decodeURI(file);
+
+    console.log(`[VertexAI] Analyzing file : ${decodedFile}`);
+    const json = await analyzeImage(decodedFile);
+    console.log(`[VertexAI] Analyzing file Done! ${decodedFile}`);
+
+    console.log(`[BigQuery] Inserting data to ${tableName} : ${decodedFile}`);
+    await insertRows(datasetName, tableName, [{ uri: decodedFile, json: JSON.stringify(json) }]);
   }
 }
 

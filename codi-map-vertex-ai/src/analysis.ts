@@ -1,5 +1,6 @@
 import { GenerateContentRequest } from "@google-cloud/vertexai";
 import { model } from "./model";
+import { VERTEX_AI } from "./config";
 
 export async function analyzeImage(cloudStorageUri: string, format = "image/jpg") {
   const request: GenerateContentRequest = {
@@ -12,6 +13,9 @@ export async function analyzeImage(cloudStorageUri: string, format = "image/jpg"
               fileUri: cloudStorageUri,
               mimeType: format,
             },
+          },
+          {
+            text: VERTEX_AI.INSTRUCTION,
           },
         ],
       },

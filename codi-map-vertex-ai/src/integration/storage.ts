@@ -12,3 +12,5 @@ export async function listBucketFiles(bucketName: string) {
   const [files] = await storage.bucket(bucketName).getFiles();
   return files.map((file) => file.cloudStorageURI.href);
 }
+
+// listBucketFiles("codi-map-images").then(console.log);

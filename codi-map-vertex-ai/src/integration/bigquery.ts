@@ -4,7 +4,7 @@ export async function createDataSet(datasetName: string) {
   const bigQueryClient = new BigQuery();
 
   const [dataset] = await bigQueryClient.createDataset(datasetName);
-  console.log(`Dataset ${dataset.id} created.`);
+  console.log(`[BigQuery] Dataset ${dataset.id} created.`);
   return dataset;
 }
 
@@ -17,7 +17,7 @@ export async function createTable(datasetName: string, tableName: string, tableS
   const bigQueryClient = new BigQuery();
 
   const [table] = await bigQueryClient.dataset(datasetName).createTable(tableName, options);
-  console.log(`Table ${table.id} created.`);
+  console.log(`[BigQuery] Table ${table.id} created.`);
   return table;
 }
 
@@ -25,5 +25,5 @@ export async function insertRows(datasetName: string, tableName: string, rows: a
   const bigQueryClient = new BigQuery();
 
   await bigQueryClient.dataset(datasetName).table(tableName).insert(rows);
-  console.log(`Inserted ${rows.length} rows.`);
+  console.log(`[BigQuery] Inserted ${rows.length} rows.`);
 }
