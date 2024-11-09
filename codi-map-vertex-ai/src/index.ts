@@ -13,19 +13,13 @@ const tableSchema = [
 ];
 
 async function main() {
-  try {
-    await createDataSet(datasetName);
-    await createTable(datasetName, tableName, tableSchema, "US");
+  const files = await listBucketFiles(bucketName);
 
-    const files = await listBucketFiles(bucketName);
-    files.forEach(async (file, index) => {
-      console.log(`Analyzing file ${index} : ${file}`);
-      const json = await analyzeImage(file);
-      console.log(`Inserting data to BigQuery : ${index}:${file}`);
-      await insertRows(datasetName, tableName, [{ uri: file, json: JSON.stringify(json) }]);
-    });
-  } catch (e) {
-    console.log(e);
+  for (const [index, file] of files.entries()) {
+    console.log(`Analyzing file ${index} : ${file}`);
+    const json = await analyzeImage(file);
+    console.log(`Inserting data to BigQuery : ${index}:${file}`);
+    await insertRows(datasetName, tableName, [{ uri: file, json: JSON.stringify(json) }]);
   }
 }
 
