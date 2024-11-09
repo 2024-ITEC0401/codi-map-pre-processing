@@ -18,8 +18,10 @@ async function main() {
     await createTable(datasetName, tableName, tableSchema, "US");
 
     const files = await listBucketFiles(bucketName);
-    files.forEach(async (file) => {
+    files.forEach(async (file, index) => {
+      console.log(`Analyzing file ${index} : ${file}`);
       const json = await analyzeImage(file);
+      console.log(`Inserting data to BigQuery : ${index}:${file}`);
       await insertRows(datasetName, tableName, [{ uri: file, json: JSON.stringify(json) }]);
     });
   } catch (e) {
