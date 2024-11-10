@@ -10,8 +10,8 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
 
-    "typeRoots": ["shared", "node_modules"]
+    "typeRoots": ["codi-map-common", "node_modules"]
   },
 
-  "include": ["shared"]
+  "include": ["codi-map-common"]
 }
